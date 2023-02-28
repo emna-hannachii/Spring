@@ -1,10 +1,20 @@
 package tn.esprit.spring.stationdeski.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table( name = "Skieur")
 public class Skieur implements Serializable {
@@ -15,7 +25,7 @@ public class Skieur implements Serializable {
     private Long numSkieur;
     private String nomS;
     private String prenomS;
-    private Date dateNaissance;
+    private LocalDate dateNaissance;
     private String ville;
 
 // Constructeur et accesseurs (getters) et mutateurs (setters)
@@ -23,10 +33,10 @@ public class Skieur implements Serializable {
     @ManyToMany
     private Set<Piste> pistes;
 
-    @OneToMany(mappedBy = "skieur",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "skieur",cascade = CascadeType.PERSIST)
     private Set<Inscription> inscriptions;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Abonnement abonnement;
 }
 
