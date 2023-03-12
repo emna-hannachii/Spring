@@ -3,11 +3,10 @@ package tn.esprit.spring.stationdeski.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.spring.stationdeski.entities.Abonnement;
 import tn.esprit.spring.stationdeski.entities.Skieur;
-import tn.esprit.spring.stationdeski.services.IAbonnementService;
+import tn.esprit.spring.stationdeski.entities.TypeAbonnement;
+import tn.esprit.spring.stationdeski.services.IPisteService;
 import tn.esprit.spring.stationdeski.services.ISkieurService;
-
 import java.util.List;
 
 @RestController
@@ -15,7 +14,7 @@ import java.util.List;
 @RequestMapping("/skieur")
 public class SkieurRestController {
     ISkieurService skieurService;
-
+    IPisteService pisteService;
     // http://localhost:8089/stationSki/skieur/retrieve-all-skieurs
     @GetMapping("/retrieve-all-skieurs")
     public List<Skieur> getskieurs(){
@@ -44,9 +43,30 @@ public class SkieurRestController {
 
     // http://localhost:8089/stationSki/skieur/update-skieur
     @PutMapping("/update-skieur")
-    public Skieur updateskieur(@RequestBody Skieur p) {
-        Skieur skieur= skieurService.updateSkieur(p);
+    public Skieur updateskieur(@RequestBody Skieur s) {
+        Skieur skieur= skieurService.updateSkieur(s);
         return skieur;
     }
+
+
+    @PutMapping("/assignSkieurToPiste/{numSkieur}/{numPiste}")
+    public Skieur assignSkieurToPiste(@PathVariable("numSkieur")Long numSkieur,
+                                      @PathVariable("numPiste") Long numPiste)
+    {
+        Skieur s=skieurService.assignSkieurToPiste(numSkieur,numPiste);
+        return s;
+    }
+    @PostMapping("/addSkieurAndAssignToCours/{numCours}")
+    public Skieur addSkieurAndAssignToCours(@RequestBody Skieur skieur, @PathVariable("numCours") Long numCours){
+        Skieur s=skieurService.addSkieurAndAssignToCours(skieur,numCours);
+        return s;
+    }
+
+    @GetMapping("/retrieve-skieurs/{abonnement-id}")
+    public List<Skieur> retrieveSkieur(@PathVariable("abonnement-id") TypeAbonnement idAbonnement) {
+
+        return skieurService.retrieveSkieursByAbonnementType(idAbonnement);
+    }
+
 
 }

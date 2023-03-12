@@ -32,7 +32,9 @@ public class Cours implements Serializable {
 
 // Constructeur et accesseurs (getters) et mutateurs (setters)
 
+
     @OneToMany(mappedBy = "cours",cascade = CascadeType.ALL)
+
     private Set<Inscription> inscriptions;
 
 

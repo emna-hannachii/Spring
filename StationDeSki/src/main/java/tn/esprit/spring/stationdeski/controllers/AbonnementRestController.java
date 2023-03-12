@@ -4,9 +4,11 @@ package tn.esprit.spring.stationdeski.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.stationdeski.entities.Abonnement;
+import tn.esprit.spring.stationdeski.entities.TypeAbonnement;
 import tn.esprit.spring.stationdeski.services.IAbonnementService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
@@ -46,4 +48,11 @@ public class AbonnementRestController {
         Abonnement abonnement= abonnementService.updateAbonnement(a);
         return abonnement;
     }
+
+
+    @GetMapping("/getAbonnementByType/{typeAbon}")
+    public Set<Abonnement> getAbonnementByType(@PathVariable("typeAbon") TypeAbonnement typeAbonnement){
+        return abonnementService.getAbonnementByType(typeAbonnement);
+    }
+
 }

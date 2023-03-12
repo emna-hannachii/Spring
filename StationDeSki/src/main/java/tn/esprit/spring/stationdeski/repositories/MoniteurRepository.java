@@ -6,4 +6,5 @@ import tn.esprit.spring.stationdeski.entities.Moniteur;
 
 public interface MoniteurRepository extends CrudRepository<Moniteur, Integer> {
 
+
 }

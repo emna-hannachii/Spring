@@ -28,6 +28,7 @@ public class Piste implements Serializable {
 
 // Constructeur et accesseurs (getters) et mutateurs (setters)
 
+    //mapped by yaani howa child w lekher parent
     @ManyToMany(mappedBy = "pistes")
     private Set<Skieur> skieurs;
 
